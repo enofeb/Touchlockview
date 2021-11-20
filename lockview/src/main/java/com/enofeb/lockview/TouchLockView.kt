@@ -3,23 +3,36 @@ package com.enofeb.lockview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.FrameLayout
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
 
 class TouchLockView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.touchLockViewStyle
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    private val binding: LayoutTouchLockViewBinding = LayoutTouchLockViewBinding.inflate(
+        LayoutInflater.from(context),
+        this, true
+    )
 
     init {
         initView()
     }
 
     private fun initView() {
-        val rootView =
-            (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as? LayoutInflater)
-                ?.inflate(R.layout.layout_touch_lock_view, this, true)
+        setLongClickListener()
+    }
 
+    private fun setLongClickListener() {
+        binding.apply {
+            constrainLayout.setOnLongClickListener {
+                switchTouch.visibility = View.VISIBLE
+                return@setOnLongClickListener true
+            }
+        }
     }
 
 }
