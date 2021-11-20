@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlin.concurrent.fixedRateTimer
 
 class TouchLockView @JvmOverloads constructor(
     context: Context,
@@ -30,8 +33,18 @@ class TouchLockView @JvmOverloads constructor(
         binding.apply {
             constrainLayout.setOnLongClickListener {
                 switchTouch.visibility = View.VISIBLE
+                fixedRateTimer("timer", false, 4000, 10) {
+                    setTimeForSwitchVisibility()
+                    this.cancel()
+                }
                 return@setOnLongClickListener true
             }
+        }
+    }
+
+    private fun setTimeForSwitchVisibility() {
+        runBlocking(Dispatchers.Main) {
+            binding.switchTouch.visibility = View.GONE
         }
     }
 
