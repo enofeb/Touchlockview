@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlin.concurrent.fixedRateTimer
 
 class TouchLockView @JvmOverloads constructor(
@@ -20,6 +19,10 @@ class TouchLockView @JvmOverloads constructor(
         LayoutInflater.from(context),
         this, true
     )
+
+    private val job = Job()
+
+    private val scope = CoroutineScope(job + Dispatchers.Main)
 
     init {
         initView()
@@ -43,9 +46,14 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun setTimeForSwitchVisibility() {
-        runBlocking(Dispatchers.Main) {
+        scope.launch {
             binding.switchTouch.visibility = View.GONE
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        job.complete()
     }
 
 }
