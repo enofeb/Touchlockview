@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
+    <Button
+        android:id="@+id/buttonDemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is app view"
@@ -15,6 +16,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDemo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is app view"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
 </com.enofeb.lockview.TouchLockView>

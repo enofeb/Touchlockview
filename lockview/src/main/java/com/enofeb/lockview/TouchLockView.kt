@@ -2,9 +2,13 @@ package com.enofeb.lockview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
 import kotlinx.coroutines.*
 import kotlin.concurrent.fixedRateTimer
@@ -17,7 +21,7 @@ class TouchLockView @JvmOverloads constructor(
 
     private val binding: LayoutTouchLockViewBinding = LayoutTouchLockViewBinding.inflate(
         LayoutInflater.from(context),
-        this, true
+        this
     )
 
     private val job = Job()
@@ -29,18 +33,33 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun initView() {
-        setLongClickListener()
+        initLongClickListener()
+        initSwitchChecked()
     }
 
-    private fun setLongClickListener() {
-        binding.apply {
-            constrainLayout.setOnLongClickListener {
-                switchTouch.visibility = View.VISIBLE
-                fixedRateTimer("timer", false, 4000, 10) {
-                    setTimeForSwitchVisibility()
-                    this.cancel()
+    private fun initLongClickListener() {
+
+        this@TouchLockView.setOnLongClickListener {
+            binding.switchTouch.visibility = View.VISIBLE
+            fixedRateTimer("timer", false, 4000, 10) {
+                setTimeForSwitchVisibility()
+                this.cancel()
+            }
+            return@setOnLongClickListener true
+        }
+
+    }
+
+    private fun initSwitchChecked() {
+        binding.switchTouch.setOnCheckedChangeListener { _, isChecked ->
+            this@TouchLockView.children.forEach {
+                if (isChecked) {
+                    if (it.id != R.id.switchTouch) {
+                        it.isClickable = false
+                    }
+                } else {
+                    it.isClickable = true
                 }
-                return@setOnLongClickListener true
             }
         }
     }

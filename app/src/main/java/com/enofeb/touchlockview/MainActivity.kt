@@ -1,6 +1,7 @@
 package com.enofeb.touchlockview
 
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.buttonDemo.setOnClickListener {
+            Toast.makeText(this,"Clicked",Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
