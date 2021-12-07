@@ -25,11 +25,46 @@ class TouchLockView @JvmOverloads constructor(
     )
 
     private val job = Job()
-
     private val scope = CoroutineScope(job + Dispatchers.Main)
 
+    private var _switchEnabledText: String? = null
+    private var _switchDisabledText: String? = null
+
+    var switchEnabledText: String?
+        get() = _switchEnabledText
+        set(value) {
+            _switchEnabledText = value
+        }
+
+    var switchDisabledText: String?
+        get() = _switchDisabledText
+        set(value) {
+            _switchDisabledText = value
+        }
+
     init {
+        obtainStyledAttributes(attrs, defStyleAttr)
         initView()
+    }
+
+    private fun obtainStyledAttributes(attrs: AttributeSet?, defStyleAttr: Int) {
+        val typedArray = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.TouchLockView,
+            defStyleAttr,
+            0
+        )
+
+        try {
+            with(typedArray) {
+                switchEnabledText = getString(R.styleable.TouchLockView_switchEnabledText)
+                switchDisabledText = getString(R.styleable.TouchLockView_switchDisabledText)
+            }
+        } catch (e: Exception) {
+            // ignored
+        } finally {
+            typedArray.recycle()
+        }
     }
 
     private fun initView() {
@@ -52,15 +87,28 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun initSwitchChecked() {
         binding.switchTouch.setOnCheckedChangeListener { _, isChecked ->
-            this@TouchLockView.children.forEach {
-                if (isChecked) {
-                    if (it.id != R.id.switchTouch) {
-                        it.isClickable = false
-                    }
-                } else {
-                    it.isClickable = true
+            adjustRootClickable(isChecked)
+            setLabel(isChecked)
+        }
+    }
+
+    private fun adjustRootClickable(isChecked: Boolean) {
+        this@TouchLockView.children.forEach {
+            if (isChecked) {
+                if (it.id != R.id.switchTouch) {
+                    it.isClickable = false
                 }
+            } else {
+                it.isClickable = true
             }
+        }
+    }
+
+    private fun setLabel(isChecked: Boolean) {
+        if (isChecked) {
+            binding.textViewLabel.text = switchEnabledText
+        } else {
+            binding.textViewLabel.text = switchDisabledText
         }
     }
 

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="touchLockViewStyle" format="reference" />
+
+    <declare-styleable name="TouchLockView">
+        <attr name="switchEnabledText" format="string" />
+        <attr name="switchDisabledText" format="string" />
+    </declare-styleable>
+
 </resources>

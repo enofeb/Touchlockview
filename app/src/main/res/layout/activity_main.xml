@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/constrainLayout"
     android:layout_width="match_parent"
+    app:switchEnabledText="ON"
+    app:switchDisabledText="OFF"
     android:layout_height="match_parent"
     android:background="@color/white">
 
