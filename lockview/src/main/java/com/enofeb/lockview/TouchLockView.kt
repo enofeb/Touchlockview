@@ -40,7 +40,7 @@ class TouchLockView @JvmOverloads constructor(
     private fun initLongClickListener() {
 
         this@TouchLockView.setOnLongClickListener {
-            binding.switchTouch.visibility = View.VISIBLE
+            showComponentItems()
             fixedRateTimer("timer", false, 4000, 10) {
                 setTimeForSwitchVisibility()
                 this.cancel()
@@ -66,7 +66,19 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun setTimeForSwitchVisibility() {
         scope.launch {
-            binding.switchTouch.visibility = View.GONE
+            binding.apply {
+                switchTouch.dismiss()
+                textViewLabel.dismiss()
+                viewLayer.dismiss()
+            }
+        }
+    }
+
+    private fun showComponentItems() {
+        binding.apply {
+            switchTouch.show()
+            textViewLabel.show()
+            viewLayer.show()
         }
     }
 

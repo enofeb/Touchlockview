@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16935904116727463" />
-        <entry key="lockview/src/main/res/layout/layout_touch_lock_view.xml" value="0.1" />
+        <entry key="lockview/src/main/res/layout/layout_touch_lock_view.xml" value="0.22" />
       </map>
     </option>
   </component>
