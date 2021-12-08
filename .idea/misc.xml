@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16935904116727463" />
+        <entry key="app/src/main/res/drawable-v24/switch_thumb_selector.xml" value="0.14947916666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="lockview/src/main/res/drawable/ic_do_not_touch.xml" value="0.34427083333333336" />
+        <entry key="lockview/src/main/res/drawable/ic_touch.xml" value="0.34427083333333336" />
+        <entry key="lockview/src/main/res/drawable/touch_anim.xml" value="0.34427083333333336" />
         <entry key="lockview/src/main/res/layout/layout_touch_lock_view.xml" value="0.22" />
       </map>
     </option>

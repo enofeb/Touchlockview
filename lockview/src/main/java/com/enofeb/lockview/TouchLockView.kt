@@ -2,11 +2,7 @@ package com.enofeb.lockview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
@@ -29,6 +25,8 @@ class TouchLockView @JvmOverloads constructor(
 
     private var _switchEnabledText: String? = null
     private var _switchDisabledText: String? = null
+
+    private var isTouchEnable: Boolean? = false
 
     var switchEnabledText: String?
         get() = _switchEnabledText
@@ -86,16 +84,26 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun initSwitchChecked() {
-        binding.switchTouch.setOnCheckedChangeListener { _, isChecked ->
-            adjustRootClickable(isChecked)
-            setLabel(isChecked)
+        binding.lottieLock.apply {
+            speed = 0.5f
+            setOnClickListener {
+                if (isTouchEnable == true) {
+                    isTouchEnable = false
+                    progress = 0.5f
+                } else {
+                    isTouchEnable = true
+                    progress = 1f
+                }
+                adjustRootClickable(isTouchEnable)
+                setLabel(isTouchEnable)
+            }
         }
     }
 
-    private fun adjustRootClickable(isChecked: Boolean) {
+    private fun adjustRootClickable(isChecked: Boolean?) {
         this@TouchLockView.children.forEach {
-            if (isChecked) {
-                if (it.id != R.id.switchTouch) {
+            if (isChecked==true) {
+                if (it.id != R.id.lottieLock) {
                     it.isClickable = false
                 }
             } else {
@@ -104,8 +112,8 @@ class TouchLockView @JvmOverloads constructor(
         }
     }
 
-    private fun setLabel(isChecked: Boolean) {
-        if (isChecked) {
+    private fun setLabel(isChecked: Boolean?) {
+        if (isChecked==true) {
             binding.textViewLabel.text = switchEnabledText
         } else {
             binding.textViewLabel.text = switchDisabledText
@@ -115,7 +123,7 @@ class TouchLockView @JvmOverloads constructor(
     private fun setTimeForSwitchVisibility() {
         scope.launch {
             binding.apply {
-                switchTouch.dismiss()
+                lottieLock.dismiss()
                 textViewLabel.dismiss()
                 viewLayer.dismiss()
             }
@@ -124,7 +132,7 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun showComponentItems() {
         binding.apply {
-            switchTouch.show()
+            lottieLock.show()
             textViewLabel.show()
             viewLayer.show()
         }

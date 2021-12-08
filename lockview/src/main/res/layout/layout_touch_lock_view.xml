@@ -31,15 +31,16 @@
             app:layout_constraintEnd_toEndOf="@+id/viewLayer"
             app:layout_constraintTop_toTopOf="@+id/viewLayer" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchTouch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieLock"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/textViewLabel"
             app:layout_constraintEnd_toStartOf="@id/textViewLabel"
             app:layout_constraintTop_toTopOf="@id/textViewLabel"
+            app:lottie_rawRes="@raw/lock"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
