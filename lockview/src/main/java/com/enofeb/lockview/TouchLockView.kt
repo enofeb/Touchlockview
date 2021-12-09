@@ -124,17 +124,17 @@ class TouchLockView @JvmOverloads constructor(
     private fun initSwitchChecked() {
         binding.lottieLock.apply {
             speed = 0.5f
-            progress = 0.5f
+            progress = DEFAULT_PROGRESS
             setOnClickListener {
                 viewCountDownTimer.cancel()
                 lockCountDownTimer.cancel()
                 lockCountDownTimer.start()
                 if (isTouchEnable == true) {
                     isTouchEnable = false
-                    setMinAndMaxProgress(0.0f, 0.5f)
+                    setMinAndMaxProgress(MIN_PROGRESS, DEFAULT_PROGRESS)
                 } else {
                     isTouchEnable = true
-                    setMinAndMaxProgress(0.5f, 1f)
+                    setMinAndMaxProgress(DEFAULT_PROGRESS, MAX_PROGRESS)
                 }
                 setLabel(isTouchEnable)
                 adjustRootClickable(isTouchEnable)
@@ -179,6 +179,12 @@ class TouchLockView @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_PROGRESS = 0.5f
+        private const val MIN_PROGRESS = 0.5f
+        private const val MAX_PROGRESS = 1f
     }
 
 }
