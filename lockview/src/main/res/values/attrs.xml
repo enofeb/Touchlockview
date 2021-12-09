@@ -3,10 +3,10 @@
     <attr name="touchLockViewStyle" format="reference" />
 
     <declare-styleable name="TouchLockView">
-        <attr name="touchEnabledText" format="string" />
-        <attr name="touchDisabledText" format="string" />
-        <attr name="touchTextColor" format="color" />
-        <attr name="touchTextSize" format="dimension" />
+        <attr name="lockEnabledText" format="string" />
+        <attr name="lockDisabledText" format="string" />
+        <attr name="lockTextColor" format="color" />
+        <attr name="lockTextSize" format="dimension" />
         <attr name="animationSpeed" format="float" />
     </declare-styleable>
 

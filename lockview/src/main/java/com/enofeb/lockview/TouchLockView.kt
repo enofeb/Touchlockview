@@ -32,37 +32,37 @@ class TouchLockView @JvmOverloads constructor(
     private lateinit var viewCountDownTimer: CountDownTimer
     private lateinit var lockCountDownTimer: CountDownTimer
 
-    private var _touchEnabledText: String? = null
-    private var _touchDisabledText: String? = null
+    private var _lockEnabledText: String? = null
+    private var _lockDisabledText: String? = null
 
     @ColorInt
-    private var _touchTextColor = Color.BLACK
+    private var _lockTextColor = Color.BLACK
 
     @FloatRange(from = 0.0, to = 1.0)
     private var _animationSpeed = 0.5f
 
     private var _hiddenViewTime: Long = 5000
 
-    var touchEnabledText: String?
-        get() = _touchEnabledText
+    var lockEnabledText: String?
+        get() = _lockEnabledText
         set(value) {
-            _touchEnabledText = value
+            _lockEnabledText = value
         }
 
-    var touchDisabledText: String?
-        get() = _touchDisabledText
+    var lockDisabledText: String?
+        get() = _lockDisabledText
         set(value) {
-            _touchDisabledText = value
+            _lockDisabledText = value
         }
 
-    var touchTextColor: Int
-        @ColorInt get() = _touchTextColor
+    var lockTextColor: Int
+        @ColorInt get() = _lockTextColor
         set(@ColorInt value) {
-            _touchTextColor = value
+            _lockTextColor = value
             binding.textViewLabel.setTextColor(value)
         }
 
-    var touchTextSize: Float
+    var lockTextSize: Float
         @Dimension get() = binding.textViewLabel.textSize
         set(@Dimension value) {
             binding.textViewLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
@@ -95,10 +95,10 @@ class TouchLockView @JvmOverloads constructor(
 
         try {
             with(typedArray) {
-                touchEnabledText = getString(R.styleable.TouchLockView_touchEnabledText)
-                touchDisabledText = getString(R.styleable.TouchLockView_touchDisabledText)
-                touchTextColor = getColor(R.styleable.TouchLockView_touchTextColor, touchTextColor)
-                touchTextSize = getDimension(R.styleable.TouchLockView_touchTextSize, touchTextSize)
+                lockEnabledText = getString(R.styleable.TouchLockView_lockEnabledText)
+                lockDisabledText = getString(R.styleable.TouchLockView_lockDisabledText)
+                lockTextColor = getColor(R.styleable.TouchLockView_lockTextColor, lockTextColor)
+                lockTextSize = getDimension(R.styleable.TouchLockView_lockTextSize, lockTextSize)
                 animationSpeed = getFloat(R.styleable.TouchLockView_animationSpeed, animationSpeed)
             }
         } catch (e: Exception) {
@@ -164,14 +164,14 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun setLabel(isChecked: Boolean?) {
         if (isChecked == true) {
-            binding.textViewLabel.text = touchEnabledText
+            binding.textViewLabel.text = lockEnabledText
         } else {
-            binding.textViewLabel.text = touchDisabledText
+            binding.textViewLabel.text = lockDisabledText
         }
     }
 
     private fun setLabelDefaultText() {
-        binding.textViewLabel.text = touchDisabledText
+        binding.textViewLabel.text = lockDisabledText
     }
 
     private fun setTimeForSwitchVisibility() {
