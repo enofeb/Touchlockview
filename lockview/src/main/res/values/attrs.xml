@@ -3,8 +3,8 @@
     <attr name="touchLockViewStyle" format="reference" />
 
     <declare-styleable name="TouchLockView">
-        <attr name="switchEnabledText" format="string" />
-        <attr name="switchDisabledText" format="string" />
+        <attr name="touchEnabledText" format="string" />
+        <attr name="touchDisabledText" format="string" />
     </declare-styleable>
 
 </resources>

@@ -26,24 +26,24 @@ class TouchLockView @JvmOverloads constructor(
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main)
 
-    private var _switchEnabledText: String? = null
-    private var _switchDisabledText: String? = null
+    private var _touchEnabledText: String? = null
+    private var _touchDisabledText: String? = null
 
     private var isTouchEnable: Boolean? = false
 
     private lateinit var viewCountDownTimer: CountDownTimer
     private lateinit var lockCountDownTimer: CountDownTimer
 
-    var switchEnabledText: String?
-        get() = _switchEnabledText
+    var touchEnabledText: String?
+        get() = _touchEnabledText
         set(value) {
-            _switchEnabledText = value
+            _touchEnabledText = value
         }
 
-    var switchDisabledText: String?
-        get() = _switchDisabledText
+    var touchDisabledText: String?
+        get() = _touchDisabledText
         set(value) {
-            _switchDisabledText = value
+            _touchDisabledText = value
         }
 
     init {
@@ -61,8 +61,8 @@ class TouchLockView @JvmOverloads constructor(
 
         try {
             with(typedArray) {
-                switchEnabledText = getString(R.styleable.TouchLockView_switchEnabledText)
-                switchDisabledText = getString(R.styleable.TouchLockView_switchDisabledText)
+                touchEnabledText = getString(R.styleable.TouchLockView_touchEnabledText)
+                touchDisabledText = getString(R.styleable.TouchLockView_touchDisabledText)
             }
         } catch (e: Exception) {
             // ignored
@@ -126,9 +126,9 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun setLabel(isChecked: Boolean?) {
         if (isChecked == true) {
-            binding.textViewLabel.text = switchEnabledText
+            binding.textViewLabel.text = touchEnabledText
         } else {
-            binding.textViewLabel.text = switchDisabledText
+            binding.textViewLabel.text = touchDisabledText
         }
     }
 
