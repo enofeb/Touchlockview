@@ -37,7 +37,8 @@
         android:id="@+id/touchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:touchDisabledText="OFF"
-        app:touchEnabledText="OFF" />
+        app:touchEnabledText="ON" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,6 +74,7 @@ class TouchLockView @JvmOverloads constructor(
     private fun initView() {
         initCountDowns()
         initSwitchChecked()
+        setLabelDefaultText()
     }
 
     private fun initCountDowns() {
@@ -130,6 +131,10 @@ class TouchLockView @JvmOverloads constructor(
         } else {
             binding.textViewLabel.text = touchDisabledText
         }
+    }
+
+    private fun setLabelDefaultText(){
+        binding.textViewLabel.text = touchDisabledText
     }
 
     private fun setTimeForSwitchVisibility() {
