@@ -3,13 +3,13 @@ package com.enofeb.lockview
 import android.content.Context
 import android.os.CountDownTimer
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
+import androidx.core.view.forEach
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
 import kotlinx.coroutines.*
-import kotlin.concurrent.fixedRateTimer
 
 class TouchLockView @JvmOverloads constructor(
     context: Context,
@@ -73,7 +73,6 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun initView() {
         initCountDowns()
-        initLongClickListener()
         initSwitchChecked()
     }
 
@@ -98,14 +97,9 @@ class TouchLockView @JvmOverloads constructor(
         }
     }
 
-    private fun initLongClickListener() {
-
-        this@TouchLockView.setOnLongClickListener {
-            showComponentItems()
-            viewCountDownTimer.start()
-            return@setOnLongClickListener true
-        }
-
+    fun start() {
+        showComponentItems()
+        viewCountDownTimer.start()
     }
 
     private fun initSwitchChecked() {
@@ -124,6 +118,7 @@ class TouchLockView @JvmOverloads constructor(
                     setMinAndMaxProgress(0.5f, 1f)
                 }
                 setLabel(isTouchEnable)
+                adjustRootClickable(isTouchEnable)
                 playAnimation()
             }
         }
@@ -138,20 +133,28 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun setTimeForSwitchVisibility() {
-        scope.launch {
-            binding.apply {
-                lottieLock.dismiss()
-                textViewLabel.dismiss()
-                viewLayer.dismiss()
-            }
-        }
+        this.dismiss()
     }
 
     private fun showComponentItems() {
-        binding.apply {
-            lottieLock.show()
-            textViewLabel.show()
-            viewLayer.show()
+        this.show()
+    }
+
+    private fun adjustRootClickable(isChecked: Boolean?) {
+
+        val parent = this.parent as? ViewGroup
+
+        parent?.children?.forEach { view ->
+            if (view !is TouchLockView) {
+                if (view is ViewGroup) {
+                    val childGroup = view as? ViewGroup
+                    childGroup?.forEach {
+                        it.isClickable = isChecked != true
+                    }
+                } else {
+                    view.isClickable = isChecked != true
+                }
+            }
         }
     }
 
