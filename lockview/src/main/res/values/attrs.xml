@@ -7,6 +7,7 @@
         <attr name="touchDisabledText" format="string" />
         <attr name="touchTextColor" format="color" />
         <attr name="touchTextSize" format="dimension" />
+        <attr name="animationSpeed" format="float" />
     </declare-styleable>
 
 </resources>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
+import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.forEach
@@ -37,6 +38,9 @@ class TouchLockView @JvmOverloads constructor(
     @ColorInt
     private var _touchTextColor = Color.BLACK
 
+    @FloatRange(from = 0.0, to = 1.0)
+    private var _animationSpeed = 0.5f
+
     var touchEnabledText: String?
         get() = _touchEnabledText
         set(value) {
@@ -62,6 +66,12 @@ class TouchLockView @JvmOverloads constructor(
             binding.textViewLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
         }
 
+    var animationSpeed: Float
+        @FloatRange(from = 0.0, to = 1.0) get() = _animationSpeed
+        set(@FloatRange(from = 0.0, to = 1.0) value) {
+            binding.lottieLock.speed = value
+        }
+
     init {
         obtainStyledAttributes(attrs, defStyleAttr)
         initView()
@@ -81,6 +91,7 @@ class TouchLockView @JvmOverloads constructor(
                 touchDisabledText = getString(R.styleable.TouchLockView_touchDisabledText)
                 touchTextColor = getColor(R.styleable.TouchLockView_touchTextColor, touchTextColor)
                 touchTextSize = getDimension(R.styleable.TouchLockView_touchTextSize, touchTextSize)
+                animationSpeed = getFloat(R.styleable.TouchLockView_animationSpeed, animationSpeed)
             }
         } catch (e: Exception) {
             // ignored
