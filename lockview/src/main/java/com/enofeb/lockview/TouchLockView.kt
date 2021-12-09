@@ -1,7 +1,9 @@
 package com.enofeb.lockview
 
 import android.content.Context
+import android.os.CountDownTimer
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
@@ -17,7 +19,8 @@ class TouchLockView @JvmOverloads constructor(
 
     private val binding: LayoutTouchLockViewBinding = LayoutTouchLockViewBinding.inflate(
         LayoutInflater.from(context),
-        this
+        this,
+        true
     )
 
     private val job = Job()
@@ -27,6 +30,9 @@ class TouchLockView @JvmOverloads constructor(
     private var _switchDisabledText: String? = null
 
     private var isTouchEnable: Boolean? = false
+
+    private lateinit var viewCountDownTimer: CountDownTimer
+    private lateinit var lockCountDownTimer: CountDownTimer
 
     var switchEnabledText: String?
         get() = _switchEnabledText
@@ -66,18 +72,37 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun initView() {
+        initCountDowns()
         initLongClickListener()
         initSwitchChecked()
+    }
+
+    private fun initCountDowns() {
+        viewCountDownTimer = object : CountDownTimer(2000, 4000) {
+            override fun onTick(p0: Long) {
+                //no-op
+            }
+
+            override fun onFinish() {
+                setTimeForSwitchVisibility()
+            }
+        }
+        lockCountDownTimer = object : CountDownTimer(2000, 4000) {
+            override fun onTick(p0: Long) {
+                //no-op
+            }
+
+            override fun onFinish() {
+                setTimeForSwitchVisibility()
+            }
+        }
     }
 
     private fun initLongClickListener() {
 
         this@TouchLockView.setOnLongClickListener {
             showComponentItems()
-            fixedRateTimer("timer", false, 4000, 10) {
-                setTimeForSwitchVisibility()
-                this.cancel()
-            }
+            viewCountDownTimer.start()
             return@setOnLongClickListener true
         }
 
@@ -86,34 +111,26 @@ class TouchLockView @JvmOverloads constructor(
     private fun initSwitchChecked() {
         binding.lottieLock.apply {
             speed = 0.5f
+            progress = 0.5f
             setOnClickListener {
+                viewCountDownTimer.cancel()
+                lockCountDownTimer.cancel()
+                lockCountDownTimer.start()
                 if (isTouchEnable == true) {
                     isTouchEnable = false
-                    progress = 0.5f
+                    setMinAndMaxProgress(0.0f, 0.5f)
                 } else {
                     isTouchEnable = true
-                    progress = 1f
+                    setMinAndMaxProgress(0.5f, 1f)
                 }
-                adjustRootClickable(isTouchEnable)
                 setLabel(isTouchEnable)
-            }
-        }
-    }
-
-    private fun adjustRootClickable(isChecked: Boolean?) {
-        this@TouchLockView.children.forEach {
-            if (isChecked==true) {
-                if (it.id != R.id.lottieLock) {
-                    it.isClickable = false
-                }
-            } else {
-                it.isClickable = true
+                playAnimation()
             }
         }
     }
 
     private fun setLabel(isChecked: Boolean?) {
-        if (isChecked==true) {
+        if (isChecked == true) {
             binding.textViewLabel.text = switchEnabledText
         } else {
             binding.textViewLabel.text = switchDisabledText

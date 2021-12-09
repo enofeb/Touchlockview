@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <View
+        android:background="#99000000"
+        android:id="@+id/viewLayer"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/viewLayer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99000000"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewLabel"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:text="ON"
+        android:textColor="@color/pink"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/viewLayer"
+        app:layout_constraintTop_toTopOf="@+id/viewLayer" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:text="ON"
-            android:textColor="@color/pink"
-            android:textSize="14sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/viewLayer"
-            app:layout_constraintTop_toTopOf="@+id/viewLayer" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLock"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="50dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/textViewLabel"
+        app:layout_constraintEnd_toStartOf="@id/textViewLabel"
+        app:layout_constraintTop_toTopOf="@id/textViewLabel"
+        app:lottie_rawRes="@raw/lock"
+        tools:visibility="visible" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieLock"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="10dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/textViewLabel"
-            app:layout_constraintEnd_toStartOf="@id/textViewLabel"
-            app:layout_constraintTop_toTopOf="@id/textViewLabel"
-            app:lottie_rawRes="@raw/lock"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>
