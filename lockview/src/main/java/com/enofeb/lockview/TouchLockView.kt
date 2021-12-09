@@ -41,6 +41,8 @@ class TouchLockView @JvmOverloads constructor(
     @FloatRange(from = 0.0, to = 1.0)
     private var _animationSpeed = 0.5f
 
+    private var _hiddenViewTime: Long = 5000
+
     var touchEnabledText: String?
         get() = _touchEnabledText
         set(value) {
@@ -70,6 +72,12 @@ class TouchLockView @JvmOverloads constructor(
         @FloatRange(from = 0.0, to = 1.0) get() = _animationSpeed
         set(@FloatRange(from = 0.0, to = 1.0) value) {
             binding.lottieLock.speed = value
+        }
+
+    var hiddenViewTime: Long
+        get() = _hiddenViewTime
+        set(@Dimension value) {
+            _hiddenViewTime = value
         }
 
     init {
@@ -107,7 +115,7 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun initCountDowns() {
-        viewCountDownTimer = object : CountDownTimer(2000, 4000) {
+        viewCountDownTimer = object : CountDownTimer(TIMER_FUTURE_MIL, hiddenViewTime) {
             override fun onTick(p0: Long) {
                 //no-op
             }
@@ -116,7 +124,7 @@ class TouchLockView @JvmOverloads constructor(
                 setTimeForSwitchVisibility()
             }
         }
-        lockCountDownTimer = object : CountDownTimer(2000, 4000) {
+        lockCountDownTimer = object : CountDownTimer(TIMER_FUTURE_MIL, hiddenViewTime) {
             override fun onTick(p0: Long) {
                 //no-op
             }
@@ -134,7 +142,7 @@ class TouchLockView @JvmOverloads constructor(
 
     private fun initSwitchChecked() {
         binding.lottieLock.apply {
-            speed = 0.5f
+            speed = animationSpeed
             progress = DEFAULT_PROGRESS
             setOnClickListener {
                 viewCountDownTimer.cancel()
@@ -196,6 +204,7 @@ class TouchLockView @JvmOverloads constructor(
         private const val DEFAULT_PROGRESS = 0.5f
         private const val MIN_PROGRESS = 0.5f
         private const val MAX_PROGRESS = 1f
+        private const val TIMER_FUTURE_MIL: Long = 2000
     }
 
 }
