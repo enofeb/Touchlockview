@@ -115,7 +115,7 @@ class TouchLockView @JvmOverloads constructor(
     }
 
     private fun initCountDowns() {
-        viewCountDownTimer = object : CountDownTimer(TIMER_FUTURE_MIL, hiddenViewTime) {
+        viewCountDownTimer = object : CountDownTimer(hiddenViewTime, INTERVAL_TIMER_FUTURE) {
             override fun onTick(p0: Long) {
                 //no-op
             }
@@ -124,7 +124,7 @@ class TouchLockView @JvmOverloads constructor(
                 setTimeForSwitchVisibility()
             }
         }
-        lockCountDownTimer = object : CountDownTimer(TIMER_FUTURE_MIL, hiddenViewTime) {
+        lockCountDownTimer = object : CountDownTimer(hiddenViewTime, INTERVAL_TIMER_FUTURE) {
             override fun onTick(p0: Long) {
                 //no-op
             }
@@ -204,7 +204,7 @@ class TouchLockView @JvmOverloads constructor(
         private const val DEFAULT_PROGRESS = 0.5f
         private const val MIN_PROGRESS = 0.5f
         private const val MAX_PROGRESS = 1f
-        private const val TIMER_FUTURE_MIL: Long = 2000
+        private const val INTERVAL_TIMER_FUTURE: Long = 2000
     }
 
 }

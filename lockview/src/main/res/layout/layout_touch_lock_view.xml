@@ -15,26 +15,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:textColor="@color/pink"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/viewLayer"
-        app:layout_constraintTop_toTopOf="@+id/viewLayer" />
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieLock"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/textViewLabel"
-        app:layout_constraintEnd_toStartOf="@id/textViewLabel"
-        app:layout_constraintTop_toTopOf="@id/textViewLabel"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_rawRes="@raw/lock"
         tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pink"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/lottieLock"
+        app:layout_constraintStart_toEndOf="@id/lottieLock"
+        app:layout_constraintTop_toTopOf="@id/lottieLock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
