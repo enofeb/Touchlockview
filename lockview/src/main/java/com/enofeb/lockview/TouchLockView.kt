@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.os.CountDownTimer
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.forEach
@@ -54,6 +56,12 @@ class TouchLockView @JvmOverloads constructor(
             binding.textViewLabel.setTextColor(value)
         }
 
+    var touchTextSize: Float
+        @Dimension get() = binding.textViewLabel.textSize
+        set(@Dimension value) {
+            binding.textViewLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
+        }
+
     init {
         obtainStyledAttributes(attrs, defStyleAttr)
         initView()
@@ -72,6 +80,7 @@ class TouchLockView @JvmOverloads constructor(
                 touchEnabledText = getString(R.styleable.TouchLockView_touchEnabledText)
                 touchDisabledText = getString(R.styleable.TouchLockView_touchDisabledText)
                 touchTextColor = getColor(R.styleable.TouchLockView_touchTextColor, touchTextColor)
+                touchTextSize = getDimension(R.styleable.TouchLockView_touchTextSize, touchTextSize)
             }
         } catch (e: Exception) {
             // ignored
