@@ -5,6 +5,7 @@
     <declare-styleable name="TouchLockView">
         <attr name="touchEnabledText" format="string" />
         <attr name="touchDisabledText" format="string" />
+        <attr name="touchTextColor" format="color" />
     </declare-styleable>
 
 </resources>

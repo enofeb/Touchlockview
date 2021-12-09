@@ -1,15 +1,16 @@
 package com.enofeb.lockview
 
 import android.content.Context
+import android.graphics.Color
 import android.os.CountDownTimer
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.forEach
 import com.enofeb.lockview.databinding.LayoutTouchLockViewBinding
-import kotlinx.coroutines.*
 
 class TouchLockView @JvmOverloads constructor(
     context: Context,
@@ -23,16 +24,16 @@ class TouchLockView @JvmOverloads constructor(
         true
     )
 
-    private val job = Job()
-    private val scope = CoroutineScope(job + Dispatchers.Main)
-
-    private var _touchEnabledText: String? = null
-    private var _touchDisabledText: String? = null
-
     private var isTouchEnable: Boolean? = false
 
     private lateinit var viewCountDownTimer: CountDownTimer
     private lateinit var lockCountDownTimer: CountDownTimer
+
+    private var _touchEnabledText: String? = null
+    private var _touchDisabledText: String? = null
+
+    @ColorInt
+    private var _touchTextColor = Color.BLACK
 
     var touchEnabledText: String?
         get() = _touchEnabledText
@@ -44,6 +45,13 @@ class TouchLockView @JvmOverloads constructor(
         get() = _touchDisabledText
         set(value) {
             _touchDisabledText = value
+        }
+
+    var touchTextColor: Int
+        @ColorInt get() = _touchTextColor
+        set(@ColorInt value) {
+            _touchTextColor = value
+            binding.textViewLabel.setTextColor(value)
         }
 
     init {
@@ -63,6 +71,7 @@ class TouchLockView @JvmOverloads constructor(
             with(typedArray) {
                 touchEnabledText = getString(R.styleable.TouchLockView_touchEnabledText)
                 touchDisabledText = getString(R.styleable.TouchLockView_touchDisabledText)
+                touchTextColor = getColor(R.styleable.TouchLockView_touchTextColor, touchTextColor)
             }
         } catch (e: Exception) {
             // ignored
@@ -133,7 +142,7 @@ class TouchLockView @JvmOverloads constructor(
         }
     }
 
-    private fun setLabelDefaultText(){
+    private fun setLabelDefaultText() {
         binding.textViewLabel.text = touchDisabledText
     }
 
@@ -161,11 +170,6 @@ class TouchLockView @JvmOverloads constructor(
                 }
             }
         }
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        job.complete()
     }
 
 }
