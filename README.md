@@ -49,7 +49,7 @@ allprojects {
 * Add TouchLockView to your module dependencies.
 ```groovy
 dependencies {
-    implementation 'com.github.enofeb:touchlockview:version'
+    implementation 'com.github.enofeb:Touchlockview:version'
 }
 ```
 
