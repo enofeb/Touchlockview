@@ -34,3 +34,20 @@ TouchLockView is a screen touch locker when the user does not want to interact t
     <attr name="lockTextSize" format="dimension" />
     <attr name="animationSpeed" format="float" />
 ```
+
+## Download
+* Add Jitpack to your root `build.gradle` repositories.
+```groovy
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+* Add TouchLockView to your module dependencies.
+```groovy
+dependencies {
+    implementation ''
+}
+```
