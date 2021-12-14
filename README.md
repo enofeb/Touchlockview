@@ -5,3 +5,23 @@ TouchLockView
 <a href="http://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat"/></a>
 
 TouchLockView is a screen touch locker when the user does not want to interact the screen wrongly. For example, while watching video.
+
+# Simple Usage
+1) Add TouchLockView to your xml.
+```kotlin
+    <com.enofeb.lockview.TouchLockView
+        android:id="@+id/touchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:lockDisabledText="LOCK DISABLED"
+        app:lockEnabledText="LOCK ENABLED" />
+```
+
+2) Set parent on long click listener. And start touchView.
+```kotlin
+    constrainLayout.setOnLongClickListener {
+         touchView.start()
+         return@setOnLongClickListener true
+    }
+```
