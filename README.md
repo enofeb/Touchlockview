@@ -25,3 +25,12 @@ TouchLockView is a screen touch locker when the user does not want to interact t
          return@setOnLongClickListener true
     }
 ```
+
+## XML Attributes
+```xml
+    <attr name="lockEnabledText" format="string" />
+    <attr name="lockDisabledText" format="string" />
+    <attr name="lockTextColor" format="color" />
+    <attr name="lockTextSize" format="dimension" />
+    <attr name="animationSpeed" format="float" />
+```
