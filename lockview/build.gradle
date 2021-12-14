@@ -47,3 +47,17 @@ dependencies {
     implementation 'com.airbnb.android:lottie:4.2.2'
 
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.enofeb.lockview'
+                artifactId = 'lock'
+                version = '1.0.3'
+            }
+        }
+    }
+}
