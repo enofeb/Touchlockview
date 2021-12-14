@@ -1,15 +1,9 @@
-package com.enofeb.touchlockview
+package com.enofeb.lockapp
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.enofeb.touchlockview.databinding.ActivityMainBinding
+import com.enofeb.lockapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

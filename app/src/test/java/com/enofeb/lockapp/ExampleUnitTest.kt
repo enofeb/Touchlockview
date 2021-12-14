@@ -1,4 +1,4 @@
-package com.enofeb.touchlockview
+package com.enofeb.lockapp
 
 import org.junit.Test
 
